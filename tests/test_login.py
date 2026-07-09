@@ -3,8 +3,7 @@ from playwright.sync_api import Page
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from utils.data import generate_random_credentials
-
-BASE_URL = "http://144.31.63.127:5000/"
+from utils.config_reader import ConfigReader
 
 
 def test_invalid_login(page: Page):
@@ -16,7 +15,7 @@ def test_invalid_login(page: Page):
       1. Индикатор загрузки
       2. После исчезновения индикатора появляется сообщение об ошибке "Invalid login or password."
     """
-    page.goto(BASE_URL)
+    page.goto(ConfigReader.get("base_url"))
     main_page = MainPage(page)
     login_page = LoginPage(page)
     login, password = generate_random_credentials()
