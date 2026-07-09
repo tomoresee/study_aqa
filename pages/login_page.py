@@ -18,9 +18,9 @@ class LoginPage:
     def is_spinner_visible(self) -> bool:
         return self.button_spinner.is_visible()
 
-    def is_spinner_hidden(self, timeout: int = 5000) -> bool:
+    def is_spinner_hidden(self) -> bool:
         try:
-            self.button_spinner.wait_for(state="hidden", timeout=timeout)
+            self.button_spinner.wait_for(state="hidden")
             return True
         except TimeoutError:
             return False
