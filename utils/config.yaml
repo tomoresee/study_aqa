@@ -1,0 +1,7 @@
+base_url: "http://144.31.63.127:5000"
+
+browser:
+  name: "chromium"
+  viewport:
+    width: 1920
+    height: 1080
