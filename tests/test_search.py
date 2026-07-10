@@ -6,13 +6,13 @@ from pages.search_page import SearchPage
 from utils.config_reader import ConfigReader
 
 
+@pytest.mark.parametrize("name", ["city", "habits"])
+@pytest.mark.parametrize("n", [10, 15])
 @pytest.mark.parametrize(
-    "name, n, filter_type",
+    "filter_type",
     [
-        ("city", 10, "Price: low to high"),
-        ("city", 15, "Price: high to low"),
-        ("habits", 10, "Price: low to high"),
-        ("habits", 15, "Price: high to low"),
+        "Price: low to high",
+        "Price: high to low",
     ]
 )
 def test_search_and_filter(page: Page, name, n, filter_type):
@@ -29,8 +29,10 @@ def test_search_and_filter(page: Page, name, n, filter_type):
 
     main_page.find(name)
     search_page.select_sort(filter_type)
-    search_page.is_loader_visible()
-    search_page.is_loader_hidden()
+    assert search_page.is_loader_visible(), "Лоадер не появился после применения сортировки"
+    assert search_page.is_loader_hidden(), "Лоадер не исчез после загрузки результатов"
     search_page.get_prices(n)
 
-    assert search_page.are_prices_sorted(n, filter_type)
+    assert search_page.are_prices_sorted(n, filter_type), (
+        f"Цены отсортированы неверно для фильтра '{filter_type}'"
+    )

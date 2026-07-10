@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+from utils.data import SortOrder
 
 
 class SearchPage:
@@ -31,12 +32,10 @@ class SearchPage:
     def are_prices_sorted(self, n, sort_type) -> bool:
         prices = self.get_prices(n)
 
-        print(prices)
-
-        if sort_type == "Price: low to high":
+        if sort_type == SortOrder.PRICE_LOW_TO_HIGH:
             return prices == sorted(prices)
 
-        elif sort_type == "Price: high to low":
+        elif sort_type == SortOrder.PRICE_HIGH_TO_LOW:
             return prices == sorted(prices, reverse=True)
 
         return False
