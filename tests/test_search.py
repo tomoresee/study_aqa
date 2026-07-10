@@ -4,15 +4,21 @@ import pytest
 from pages.main_page import MainPage
 from pages.search_page import SearchPage
 from utils.config_reader import ConfigReader
+from utils.data import SortOrderType
 
 
-@pytest.mark.parametrize("name", ["city", "habits"])
-@pytest.mark.parametrize("n", [10, 15])
+@pytest.mark.parametrize(
+    "name, n",
+    [
+        ("city", 10),
+        ("habits", 15),
+    ]
+)
 @pytest.mark.parametrize(
     "filter_type",
     [
-        "Price: low to high",
-        "Price: high to low",
+        SortOrderType.PRICE_LOW_TO_HIGH,
+        SortOrderType.PRICE_HIGH_TO_LOW,
     ]
 )
 def test_search_and_filter(page: Page, name, n, filter_type):
