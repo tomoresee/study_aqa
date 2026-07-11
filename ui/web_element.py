@@ -13,7 +13,7 @@ class WebElement:
             self,
             locator: Locator,
             description: str,
-            page: Page | None =None,
+            page: Page | None = None,
     ) -> None:
         self.page = page
         self.locator = locator
@@ -30,7 +30,7 @@ class WebElement:
 
     def get_text_content(self) -> str:
         logger.info(f"{self}: get text content")
-        result = self.locator.text_content()
+        result = self.locator.text_content().strip()
         logger.info(f"{self}: text content = '{result}'")
         return result
 
