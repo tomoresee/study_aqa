@@ -1,6 +1,7 @@
 import pytest
 
 from logger import setup_logger
+from pages.javascript_alerts import JavascriptAlerts
 from ui.page_actions import PageActions
 from playwright.sync_api import Page
 from pages.basic_auth_page import BasicAuthPage
@@ -17,5 +18,10 @@ def actions(page: Page) -> PageActions:
 
 
 @pytest.fixture(scope="function")
-def basic_auth_page(page: Page):
+def basic_auth_page(page: Page) -> BasicAuthPage:
     return BasicAuthPage(page)
+
+
+@pytest.fixture(scope="function")
+def js_alert_page(page: Page) -> JavascriptAlerts:
+    return JavascriptAlerts(page)

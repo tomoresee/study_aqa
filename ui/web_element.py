@@ -71,3 +71,9 @@ class WebElement:
     def set_input_files(self, file_path: Path) -> None:
         logger.info(f"{self}: set input files '{file_path}'")
         self.locator.set_input_files(file_path)
+
+    def is_visible(self) -> bool:
+        logger.info(f"{self}: check visibility")
+        result = self.locator.is_visible()
+        logger.info(f"{self}: visible = {result}")
+        return result
